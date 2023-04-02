@@ -12,9 +12,9 @@ class Solution{
     long long int floorSqrt(long long int x) 
     {    
     if (x == 0 || x == 1) return x;
-    int start = 1, end = x, ans;
+    long long start = 1, end = x, ans;
     while (start <= end) {
-        int mid = (start + end) / 2;
+        long long mid = (start + end) / 2;
         if (mid == x / mid) return mid;
         if (mid < x / mid) {
             start = mid + 1;
