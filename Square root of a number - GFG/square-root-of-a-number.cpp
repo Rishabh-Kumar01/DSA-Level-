@@ -15,8 +15,8 @@ class Solution{
     long long start = 1, end = x, ans;
     while (start <= end) {
         long long mid = (start + end) / 2;
-        if (mid == x / mid) return mid;
-        if (mid < x / mid) {
+        if (mid*mid == x) return mid;
+        if (mid*mid< x) {
             start = mid + 1;
             ans = mid;
         } else {
