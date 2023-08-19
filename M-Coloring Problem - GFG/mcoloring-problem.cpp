@@ -7,31 +7,33 @@ using namespace std;
 class Solution{
 public:
 
-    bool isSafe(int node, int color[], bool graph[101][101], int n, int col){
-        for(int k=0; k<n; k++){
-            if(k != node && graph[node][k] == 1 && color[k] == col){
+    bool isSafe(int node, vector<int> &color, bool graph[101][101], int n, int col){
+        for(int k =0; k<n; k++){
+            if(k!= node && graph[k][node] == 1 && color[k] == col){
                 return false;
             }
         }
         return true;
     }
 
-    bool solve(int node, int color[], int m, int n , bool graph[101][101]){
+    bool rec(int node, int m, int n, vector<int> &color, bool graph[101][101]){
         if(node == n) return true;
         
-        for(int i = 1; i <= m; i++){
+        for(int i =1; i<=m; i++){
             if(isSafe(node, color, graph, n, i)){
                 color[node] = i;
-                if(solve(node+1, color, m, n, graph)) return true;
+                if(rec(node+1, m, n, color, graph)) return true;
                 color[node] = 0;
             }
         }
         return false;
     }
-    
+    // Function to determine if graph can be coloured with at most M colours such
+    // that no two adjacent vertices of graph are coloured with same colour.
     bool graphColoring(bool graph[101][101], int m, int n) {
-        int color[n] = {0};
-        if(solve(0, color, m, n, graph)) return true;
+        // your code here
+        vector<int> color(n,0);
+        if(rec(0,m,n,color,graph)) return true;
         return false;
     }
 };
